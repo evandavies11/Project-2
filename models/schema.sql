@@ -1,5 +1,9 @@
-DROP DATABASE IF EXISTS exampledb;
-CREATE DATABASE exampledb;
+CREATE TABLE books (
 
-DROP DATABASE IF EXISTS testdb;
-CREATE DATABASE testdb;
+id INT(100) NOT NULL,
+title VARCHAR(100) NOT NULL,
+name_of_borrower VARCHAR(100) NOT NULL,
+date_borrowed 	DATE NOT NULL,
+due_date DATE NOT NULL,
+PRIMARY KEY (id)
+ );
