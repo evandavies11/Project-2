@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "Rajesh@82",
-    "database": "books",
+    "password": null,
+    "database": "exampledb",
     "host": "localhost",
     "dialect": "mysql"
   },
