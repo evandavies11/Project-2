@@ -13,18 +13,26 @@
   "dependencies": {
     "dotenv": "^8.0.0",
     "eslint-config-prettier": "^6.3.0",
+    "eslint-plugin-prettier": "^3.1.1",
     "express": "^4.17.0",
     "express-handlebars": "^3.1.0",
+    "fs": "0.0.1-security",
+    "googleapis": "^43.0.0",
+    "http": "0.0.0",
     "mysql2": "^1.6.5",
+    "open": "^6.4.0",
+    "path": "^0.12.7",
     "prettier": "^1.18.2",
-    "sequelize": "^5.8.6"
+    "save": "^2.4.0",
+    "sequelize": "^5.8.6",
+    "server-destroy": "^1.0.1",
+    "url": "^0.11.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "cross-env": "^5.2.0",
     "eslint": "^5.16.0",
-    "eslint-plugin-prettier": "^3.1.0",
     "mocha": "^6.1.4"
   }
 }
