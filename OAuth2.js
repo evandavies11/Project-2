@@ -1,40 +1,36 @@
 "use strict";
-
+require("dotenv").config();
+// eslint-disable-next-line no-unused-vars
 const fs = require("fs");
+// eslint-disable-next-line no-unused-vars
 const path = require("path");
 const http = require("http");
 const url = require("url");
 const opn = require("open");
 const destroyer = require("server-destroy");
+var keys = require("./keys/keys.js");
 
 // eslint-disable-next-line prettier/prettier
 const {google} = require("googleapis");
 // eslint-disable-next-line prettier/prettier
 // eslint-disable-next-line quotes
 const plus = google.plus("v1");
-const ClientId =
-  "453625763887-2k6u898jqp76rojfh9dkd3rf6l2bfidd.apps.googleusercontent.com";
-const ClientSecret = "P20R3qgmgPxMSOPzjoRuqcTr";
-const RedirectionUrl = "https://booksharemahadanevan.herokuapp.com";
 
-/**
- * To use OAuth2 authentication, we need access to a a CLIENT_ID, CLIENT_SECRET, AND REDIRECT_URI.  To get these credentials for your application, visit https://console.cloud.google.com/apis/credentials.
- */
-const keyPath = path.join(__dirname, "package.json");
+// const keyPath = path.join(__dirname, ".keys/keys.js");
+// console.log(keyPath);
 
-// eslint-disable-next-line no-unused-vars
-let keys = { redirect_uris: [""] };
-if (fs.existsSync(keyPath)) {
-  keys = require(keyPath).web;
-}
-
+const redirect_uris = "https://booksharemahadanevan.herokuapp.com";
+// if (fs.existsSync(keyPath)) {
+//   keys = require(keyPath).web;
+// }
+console.log(keys);
 /**
  * Create a new OAuth2 client with the configured keys.
  */
 const oauth2Client = new google.auth.OAuth2(
-  ClientId,
-  ClientSecret,
-  RedirectionUrl
+  keys.googlekeys.client_id,
+  keys.googlekeys.client_secret,
+  redirect_uris
 );
 
 /**
