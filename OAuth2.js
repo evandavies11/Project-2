@@ -18,9 +18,7 @@ const plus = google.plus("v1");
 
 // const keyPath = path.join(__dirname, ".keys/keys.js");
 // console.log(keyPath);
-const client_id =
-  "453625763887-2k6u898jqp76rojfh9dkd3rf6l2bfidd.apps.googleusercontent.com";
-const client_secret="P20R3qgmgPxMSOPzjoRuqcTr";
+
 const redirect_uris = "https://booksharemahadanevan.herokuapp.com";
 // if (fs.existsSync(keyPath)) {
 //   keys = require(keyPath).web;
