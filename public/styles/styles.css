@@ -1,3 +1,22 @@
 .list-group-item {
   line-height: 2.5;
 }
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body{
+    font-family: "Roboto", sans-serif;
+    background-color: bisque; /* no-repeat center center fixed;*/
+    /*background-size: cover;*/
+    color:#25a890;
+}
+
+/*navbar style*/
+#the-navbar{
+    background-color: rgb(117, 16, 199);
+    color:#25a890 ;
+}
+
+.container{
+    background-color: rgb(117, 16, 199);
+    margin-top: 80px;
+}
