@@ -22,15 +22,15 @@ if (config.use_env_variable) {
 //$("#checkout").trim().val()
 //$("#dueDate").trim().val()
 var daysLeft = "MM-DD-YYYY";
-var showDaysLeft = function() {
+var showDaysLeft = function(dueDate) {
   //for (var i = 0; i < db.length; i++) {
   var today = moment();
   //in real app pull these dates from the database
-  var dueDate = moment("09-23-2019", "MM-DD-YYYY");
+  dueDateFormatted = moment(dueDate, "MM-DD-YYYY");
   //in real app pull these dates from the database
-  daysLeft = moment(dueDate).diff(today, "days");
+  daysLeft = moment(dueDateFormatted).diff(today, "days");
   console.log(daysLeft);
   //}
 };
 
-showDaysLeft();
+module.exports = showDaysLeft;
