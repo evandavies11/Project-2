@@ -1,6 +1,9 @@
 // Get references to page elements
 var $bookTitle = $("#book-title");
 var $borrower = $("#borrower");
+//Use these variables when building past due alarm
+//var $checkout = $("#checkout-date");
+//var $dueDate = $("due-date");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
 
@@ -12,28 +15,28 @@ var API = {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/examples",
+      url: "api/books",
       data: JSON.stringify(example)
     });
   },
-  getExamples: function() {
+  getBooks: function() {
     return $.ajax({
-      url: "api/examples",
+      url: "api/books",
       type: "GET"
     });
   },
-  deleteExample: function(id) {
+  deleteBooks: function(id) {
     return $.ajax({
-      url: "api/examples/" + id,
+      url: "api/books/" + id,
       type: "DELETE"
     });
   }
 };
 
 // refreshExamples gets new examples from the db and repopulates the list
-var refreshExamples = function() {
-  API.getExamples().then(function(data) {
-    var $examples = data.map(function(example) {
+var refreshBooks = function() {
+  API.getBooks().then(function(data) {
+    var $books = data.map(function(example) {
       var $a = $("<a>")
         .text(example.text)
         .attr("href", "/example/" + example.id);
@@ -55,7 +58,7 @@ var refreshExamples = function() {
     });
 
     $exampleList.empty();
-    $exampleList.append($examples);
+    $exampleList.append($books);
   });
 };
 
@@ -75,7 +78,7 @@ var handleFormSubmit = function(event) {
   }
 
   API.saveExample(example).then(function() {
-    refreshExamples();
+    refreshBooks();
   });
 
   $bookTitle.val("");
@@ -90,7 +93,7 @@ var handleDeleteBtnClick = function() {
     .attr("data-id");
 
   API.deleteExample(idToDelete).then(function() {
-    refreshExamples();
+    refreshBooks();
   });
 };
 
