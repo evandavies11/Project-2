@@ -9,7 +9,7 @@ var $exampleList = $("#example-list");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
-  saveExample: function(example) {
+  saveBooks: function(example) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
@@ -77,7 +77,7 @@ var handleFormSubmit = function(event) {
     return;
   }
 
-  API.saveExample(example).then(function() {
+  API.saveBooks(example).then(function() {
     refreshBooks();
   });
 
@@ -92,7 +92,7 @@ var handleDeleteBtnClick = function() {
     .parent()
     .attr("data-id");
 
-  API.deleteExample(idToDelete).then(function() {
+  API.deleteBooks(idToDelete).then(function() {
     refreshBooks();
   });
 };
