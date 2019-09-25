@@ -11,7 +11,7 @@ const destroyer = require("server-destroy");
 var keys = require("./keys/keys.js");
 
 // eslint-disable-next-line prettier/prettier
-const {google} = require("googleapis");
+const { google } = require("googleapis");
 // eslint-disable-next-line prettier/prettier
 // eslint-disable-next-line quotes
 const plus = google.plus("v1");
