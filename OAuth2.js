@@ -8,7 +8,7 @@ const http = require("http");
 const url = require("url");
 const opn = require("open");
 const destroyer = require("server-destroy");
-var keys = require("./keys/keys.js");
+var keys = require("../keys/keys.js");
 
 // eslint-disable-next-line prettier/prettier
 const {google} = require("googleapis");
@@ -26,7 +26,8 @@ const redirect_uris = "https://booksharemahadanevan.herokuapp.com";
 console.log(keys);
 /**
  * Create a new OAuth2 client with the configured keys.
- */
+ 
+*/
 const oauth2Client = new google.auth.OAuth2(
   keys.googlekeys.client_id,
   keys.googlekeys.client_secret,
