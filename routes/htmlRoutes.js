@@ -4,6 +4,15 @@ module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
     db.books.findAll({}).then(function(dbBooks) {
+      res.render("userpage", {
+        msg: "Welcome!",
+        books: dbBooks
+      });
+    });
+  });
+
+  app.get("/home", function(req, res) {
+    db.books.findAll({}).then(function(dbBooks) {
       res.render("index", {
         msg: "Welcome!",
         books: dbBooks
