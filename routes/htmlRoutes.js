@@ -3,7 +3,17 @@ var db = require("../models");
 module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
+
     db.books.findAll({}).then(function(dbBooks) {
+      res.render("userpage", {
+        msg: "Welcome!",
+        examples: dbExamples
+      });
+    });
+  });
+  app.get("/home", function(req, res) {
+    db.Example.findAll({}).then(function(dbExamples) {
+
       res.render("index", {
         msg: "Welcome!",
         books: dbBooks

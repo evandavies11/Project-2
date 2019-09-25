@@ -19,14 +19,15 @@ const plus = google.plus("v1");
 // const keyPath = path.join(__dirname, ".keys/keys.js");
 // console.log(keyPath);
 
-const redirect_uris = "https://booksharemahadanevan.herokuapp.com";
+const redirect_uris = "https://booksharemahadanevan.herokuapp.com/home";
 // if (fs.existsSync(keyPath)) {
 //   keys = require(keyPath).web;
 // }
 console.log(keys);
 /**
  * Create a new OAuth2 client with the configured keys.
- */
+ 
+*/
 const oauth2Client = new google.auth.OAuth2(
   keys.googlekeys.client_id,
   keys.googlekeys.client_secret,
