@@ -8,7 +8,7 @@ const http = require("http");
 const url = require("url");
 const opn = require("open");
 const destroyer = require("server-destroy");
-var keys = require("../keys/keys.js");
+var keys = require("./keys/keys.js");
 
 // eslint-disable-next-line prettier/prettier
 const {google} = require("googleapis");
@@ -19,7 +19,7 @@ const plus = google.plus("v1");
 // const keyPath = path.join(__dirname, ".keys/keys.js");
 // console.log(keyPath);
 
-const redirect_uris = "https://booksharemahadanevan.herokuapp.com";
+const redirect_uris = "https://booksharemahadanevan.herokuapp.com/home";
 // if (fs.existsSync(keyPath)) {
 //   keys = require(keyPath).web;
 // }
