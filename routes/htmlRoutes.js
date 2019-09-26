@@ -33,4 +33,14 @@ module.exports = function(app) {
   app.get("*", function(req, res) {
     res.render("404");
   });
+
+  //loads the teampage
+  app.get("/team", function(req, res) {
+    db.books.findAll({}).then(function(dbBooks) {
+      res.render("teampage", {
+        msg: "Welcome!",
+        books: dbBooks
+      });
+    });
+  });
 };
