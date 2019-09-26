@@ -20,7 +20,7 @@ module.exports = function(app) {
     });
   });
 
-  // Load example page and pass in an example by id
+  // Loads one book in particular and displays details in a card
   app.get("/example/:id", function(req, res) {
     db.books.findOne({ where: { id: req.params.id } }).then(function(dbBooks) {
       res.render("books", {

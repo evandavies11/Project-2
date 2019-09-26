@@ -26,8 +26,8 @@
   </div>
 </nav>
 
-<div id = "google id"></div>
-<div id ="google email"></div>
+<div id="google id"></div>
+<div id="google email"></div>
 
 <div id="home">
   <div class="container">
@@ -62,7 +62,7 @@
           <button id="submit" class="btn btn-primary float-right">Submit</button>
         </form>
 
-        <h3>Examples:</h3>
+        <h3>Your Books:</h3>
         <ul id="example-list" class="list-group">
           {{#each books}}
           <li data-id="{{this.id}}" class="list-group-item">
@@ -81,61 +81,59 @@
 
 
 <script type="text/javascript">
-$(document).ready(function() {
-      
-  alert($.urlParam("code"));
-  var code = $.urlParam("code");
-       if(!$.urlParam("code"))
-       {
-window.location = "https://booksharemahadanevan.herokuapp.com";
-       }
-      else
-      {        
-var result = getGoogleAccountFromCode(code);
- $("#google id").text(result.id);
-  $("#google email").text(result.email);
-       }
-   });
+  $(document).ready(function () {
 
-$.urlParam = function (name) {
-   var results = new RegExp('[\?&]' + name + '=([^&#]*)')
-                     .exec(window.location.search);
+    alert($.urlParam("code"));
+    var code = $.urlParam("code");
+    if (!$.urlParam("code")) {
+      window.location = "https://booksharemahadanevan.herokuapp.com";
+    }
+    else {
+      var result = getGoogleAccountFromCode(code);
+      $("#google id").text(result.id);
+      $("#google email").text(result.email);
+    }
+  });
 
-   return (results !== null) ? results[1] || 0 : false;
-}
+  $.urlParam = function (name) {
+    var results = new RegExp('[\?&]' + name + '=([^&#]*)')
+      .exec(window.location.search);
 
-function getGooglePlusApi(auth) {
- return google.plus({ version: 'v1', auth });
-}
+    return (results !== null) ? results[1] || 0 : false;
+  }
 
-/**
-* Extract the email and id of the google account from the "code" parameter.
-*/
-function getGoogleAccountFromCode(code) {
- 
- // get the auth "tokens" from the request
- const data = await auth.getToken(code);
- const tokens = data.tokens;
- 
- // add the tokens to the google api so we have access to the account
- const auth = createConnection();
- auth.setCredentials(tokens);
- 
- // connect to google plus - need this to get the user's email
- const plus = getGooglePlusApi(auth);
- const me = await plus.people.get({ userId: 'me' });
- 
- // get the google id and email
- const userGoogleId = me.data.id;
- const userGoogleEmail = me.data.emails && me.data.emails.length && me.data.emails[0].value;
- 
- 
- 
- // return so we can login or sign up the user
- return {
-   id: userGoogleId,
-   email: userGoogleEmail,
-   tokens: tokens, // you can save these to the user if you ever want to get their details without making them log in again
- };
-}
+  function getGooglePlusApi(auth) {
+    return google.plus({ version: 'v1', auth });
+  }
+
+  /**
+  * Extract the email and id of the google account from the "code" parameter.
+  */
+  function getGoogleAccountFromCode(code) {
+
+    // get the auth "tokens" from the request
+    const data = await auth.getToken(code);
+    const tokens = data.tokens;
+
+    // add the tokens to the google api so we have access to the account
+    const auth = createConnection();
+    auth.setCredentials(tokens);
+
+    // connect to google plus - need this to get the user's email
+    const plus = getGooglePlusApi(auth);
+    const me = await plus.people.get({ userId: 'me' });
+
+    // get the google id and email
+    const userGoogleId = me.data.id;
+    const userGoogleEmail = me.data.emails && me.data.emails.length && me.data.emails[0].value;
+
+
+
+    // return so we can login or sign up the user
+    return {
+      id: userGoogleId,
+      email: userGoogleEmail,
+      tokens: tokens, // you can save these to the user if you ever want to get their details without making them log in again
+    };
+  }
 </script>
