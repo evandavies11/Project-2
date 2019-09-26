@@ -11,7 +11,7 @@ module.exports = function(app) {
     });
   });
 
-  app.get("/home", function(req, res) {
+  app.get("/home?code=", function(req, res) {
     db.books.findAll({}).then(function(dbBooks) {
       res.render("index", {
         msg: "Welcome!",
