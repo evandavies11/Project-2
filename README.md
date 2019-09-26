@@ -25,3 +25,9 @@ Evan Davies
 
 https://github.com/evandavies11
 
+**To View The Deployed Version**
+
+simply follow this link
+
+https://booksharemahadanevan.herokuapp.com
+

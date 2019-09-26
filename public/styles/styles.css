@@ -10,7 +10,7 @@ body{
    color:#25a890;
    background-image: url(../styles/img/2663184.jpg) ;
    background-position: center center;
-   background-size: 1500px 1500px;
+   background-size: 100% 1900px;
    background-repeat: no-repeat;
 }
 
@@ -42,4 +42,35 @@ body{
     border-radius: 5px;
     box-shadow: 0px 0px 3px #848484;
     opacity: .95;
+    
+}
+
+/*button style*/
+
+#submit{
+    width: 40%;
+    margin: 5px 0 25px; 
+}
+
+.btn{
+    background-color: #27c2a5;
+    color: #fff;
+    font-size: 19px;
+    padding: 7px 14px;
+    border-radius: 5px;
+    border-bottom: 4px solid #219882
+}
+
+.btn:hover, .btn:focus{
+    background-color: #25a890;
+    border-bottom: 4px solid #25a890;
+}
+
+/*information page style*/
+
+#info{
+    font-weight: 900;
+    font-size: 20px;
+    text-align: center justify;
+    margin-top: 20px;
 }
