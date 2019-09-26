@@ -3,30 +3,29 @@ var $bookTitle = $("#book-title");
 var $borrower = $("#borrower");
 //Use these variables when building past due alarm
 var $checkout = $("#checkout-date");
-var $dueDate = $("due-date");
+var $dueDate = $("#due-date");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
-  saveBooks: function(books) {
-    console.log(books);
+  saveBooks: function (dbBooks) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
       },
       type: "POST",
       url: "api/books",
-      data: JSON.stringify(books)
+      data: JSON.stringify(dbBooks)
     });
   },
-  getBooks: function() {
+  getBooks: function () {
     return $.ajax({
       url: "api/books",
       type: "GET"
     });
   },
-  deleteBooks: function(id) {
+  deleteBooks: function (id) {
     return $.ajax({
       url: "api/books/" + id,
       type: "DELETE"
@@ -35,12 +34,12 @@ var API = {
 };
 
 // refreshExamples gets new examples from the db and repopulates the list
-var refreshBooks = function() {
-  API.getBooks().then(function(data) {
-    var $books = data.map(function(book) {
+var refreshBooks = function () {
+  API.getBooks().then(function (data) {
+    var $books = data.map(function (book) {
       var $a = $("<a>")
         .text(book.title)
-        .attr("href", "/books/" + book.id);
+        .attr("href", "/example/" + book.id);
 
       var $li = $("<li>")
         .attr({
@@ -65,7 +64,7 @@ var refreshBooks = function() {
 
 // handleFormSubmit is called whenever we submit a new example
 // Save the new example to the db and refresh the list
-var handleFormSubmit = function(event) {
+var handleFormSubmit = function (event) {
   event.preventDefault();
 
   var book = {
@@ -87,7 +86,7 @@ var handleFormSubmit = function(event) {
     return;
   }
 
-  API.saveBooks(book).then(function() {
+  API.saveBooks(book).then(function () {
     refreshBooks();
   });
 
@@ -99,12 +98,12 @@ var handleFormSubmit = function(event) {
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
 // Remove the example from the db and refresh the list
-var handleDeleteBtnClick = function() {
+var handleDeleteBtnClick = function () {
   var idToDelete = $(this)
     .parent()
     .attr("data-id");
 
-  API.deleteBooks(idToDelete).then(function() {
+  API.deleteBooks(idToDelete).then(function () {
     refreshBooks();
   });
 };
