@@ -20,6 +20,15 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/team", function(req, res) {
+    db.books.findAll({}).then(function(dbBooks) {
+      res.render("teampage", {
+        msg: "Welcome!",
+        books: dbBooks
+      });
+    });
+  });
+
   // Loads one book in particular and displays details in a card
   app.get("/example/:id", function(req, res) {
     db.books.findOne({ where: { id: req.params.id } }).then(function(dbBooks) {
