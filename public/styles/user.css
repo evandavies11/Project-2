@@ -2,8 +2,13 @@
 
 body{
     font-family: "Roboto", sans-serif;
-    background-color: bisque /* no-repeat center center fixed;*/
+     /* no-repeat center center fixed;*/
     /*background-size: cover;*/
+    color:#25a890;
+    background-image: url(../styles/img/2663184.jpg) ;
+    background-position: center center;
+    background-size: 1500px 1500px;
+    background-repeat: no-repeat;
 }
 
 /*navbar style*/
