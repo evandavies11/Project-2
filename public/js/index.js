@@ -2,21 +2,21 @@
 var $bookTitle = $("#book-title");
 var $borrower = $("#borrower");
 //Use these variables when building past due alarm
-//var $checkout = $("#checkout-date");
-//var $dueDate = $("due-date");
+var $checkout = $("#checkout-date");
+var $dueDate = $("#due-date");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
-  saveBooks: function(example) {
+  saveBooks: function(dbBooks) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
       },
       type: "POST",
       url: "api/books",
-      data: JSON.stringify(example)
+      data: JSON.stringify(dbBooks)
     });
   },
   getBooks: function() {
@@ -36,15 +36,15 @@ var API = {
 // refreshExamples gets new examples from the db and repopulates the list
 var refreshBooks = function() {
   API.getBooks().then(function(data) {
-    var $books = data.map(function(example) {
+    var $books = data.map(function(book) {
       var $a = $("<a>")
-        .text(example.text)
-        .attr("href", "/example/" + example.id);
+        .text(book.title)
+        .attr("href", "/example/" + book.id);
 
       var $li = $("<li>")
         .attr({
           class: "list-group-item",
-          "data-id": example.id
+          "data-id": book.id
         })
         .append($a);
 
@@ -67,22 +67,33 @@ var refreshBooks = function() {
 var handleFormSubmit = function(event) {
   event.preventDefault();
 
-  var example = {
-    text: $bookTitle.val().trim(),
-    description: $borrower.val().trim()
+  var book = {
+    title: $bookTitle.val().trim(),
+    name_of_borrower: $borrower.val().trim(),
+    date_borrowed: $checkout.val().trim(),
+    due_date: $dueDate.val().trim()
   };
 
-  if (!(example.text && example.description)) {
+  if (
+    !(
+      book.title &&
+      book.name_of_borrower &&
+      book.date_borrowed &&
+      book.due_date
+    )
+  ) {
     alert("Please enter the entire form");
     return;
   }
 
-  API.saveBooks(example).then(function() {
+  API.saveBooks(book).then(function() {
     refreshBooks();
   });
 
   $bookTitle.val("");
   $borrower.val("");
+  $checkout.val("");
+  $dueDate.val("");
 };
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
