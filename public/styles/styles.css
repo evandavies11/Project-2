@@ -74,3 +74,12 @@ body{
     text-align: center justify;
     margin-top: 20px;
 }
+
+/*information page style*/
+
+#dev-container{
+    width: 900px;
+    height: 550px;
+    margin-top: 40px;
+    padding-top: 60px;
+}
