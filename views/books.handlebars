@@ -16,7 +16,8 @@
             <p>
               <strong>Due Date:</strong> {{books.due_date}}</p>
             <a href="#">
-              <button onClick="sendEmail()" data-subject={{books.title}} data-due={{books.date_borrowed}} id="message">
+              <button onClick="sendEmail()" class="btn btn-primary float-right" data-subject={{books.title}}
+                data-due={{books.date_borrowed}} id="message">
                 Send a Reminder</button></a>
             <a href="/">← Back To Home</a>
         </div>
