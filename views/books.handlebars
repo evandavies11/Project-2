@@ -15,9 +15,21 @@
               <strong>Checkout Date:</strong> {{books.date_borrowed}}</p>
             <p>
               <strong>Due Date:</strong> {{books.due_date}}</p>
+            <a href="#">
+              <button onClick="sendEmail()" data-subject={{books.title}} data-due={{books.date_borrowed}} id="message">
+                Send a Reminder</button></a>
             <a href="/">← Back To Home</a>
         </div>
       </div>
     </div>
   </div>
 </div>
+<script>
+  var sendEmail = function () {
+    var message = document.querySelector("#message");
+    var email = "daniel.smith8795@gmail.com";
+    var subject = "Book due";
+    var emailBody = 'Hello, just a reminder that I need my book back by ' + message.dataset.due;
+    document.location = "mailto:" + email + "?subject=" + subject + "&body=" + emailBody;
+  }
+</script>
