@@ -1,3 +1,34 @@
+<link rel="stylesheet" href="/public/styles/styles.css" media="screen" title="no title" charset="utf-8">
+
+<!--navbar-->
+<nav class="navbar navbar-expand-lg " id="the-navbar">
+  <a class="navbar-brand" href="#"><B>BOOKSHARE</B></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About Our Team</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Mission</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Your Books</a>
+      </li>
+
+    </ul>
+  </div>
+</nav>
+
+<div id = "google id"></div>
+<div id ="google email"></div>
+
 <div id="home">
   <div class="container">
     <div class="row">
@@ -7,21 +38,25 @@
         <form class="clearfix mb-4" action="POST">
 
           <div class="form-group">
-            <label for="example-text">What is the name of the Book Being Borrowed?</label>
-            <input type="text" id="example-text" class="form-control" aria-describedby="example-text"
-              placeholder="Enter Example Text">
+            <label for="book-title">What is the name of the Book Being Borrowed?</label>
+            <input type="text" id="book-title" class="form-control" aria-describedby="book-title"
+              placeholder="Book Title">
           </div>
 
           <div class="form-group">
-            <label for="example-description">Who Borrowed Your Book</label>
-            <textarea class="form-control" id="example-description" aria-describedby="example-description"
-              placeholder="Enter Example Description"></textarea>
+            <label for="borrower">Who Borrowed Your Book</label>
+            <textarea class="form-control" id="borrower" aria-describedby="borrower"
+              placeholder="Borrower name"></textarea>
           </div>
 
           <div class="form-group">
-            <label for="example-text">How Long Has It Been Gone?</label>
-            <input type="text" id="example-text" class="form-control" aria-describedby="example-text"
-              placeholder="Enter Example Text">
+            <label for="checkout-date">When did you loan it to them?</label>
+            <input type="date" id="checkout-date" class="form-control" aria-describedby="checkout-date"
+              placeholder="Checkout Date">
+          </div>
+          <div class="form-group">
+            <label for="due-date">When do you need it back by?</label>
+            <input type="date" id="due-date" class="form-control" aria-describedby="due-date" placeholder="Due Date">
           </div>
 
           <button id="submit" class="btn btn-primary float-right">Submit</button>
@@ -29,9 +64,9 @@
 
         <h3>Examples:</h3>
         <ul id="example-list" class="list-group">
-          {{#each examples}}
+          {{#each books}}
           <li data-id="{{this.id}}" class="list-group-item">
-            <a href="example/{{this.id}}">{{this.text}}</a>
+            <a href="example/{{this.id}}">{{this.title}}</a>
             <button class="btn btn-danger float-right delete">ｘ</button>
           </li>
           {{/each}}
@@ -43,3 +78,64 @@
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+      
+  alert($.urlParam("code"));
+  var code = $.urlParam("code");
+       if(!$.urlParam("code"))
+       {
+window.location = "https://booksharemahadanevan.herokuapp.com";
+       }
+      else
+      {        
+var result = getGoogleAccountFromCode(code);
+ $("#google id").text(result.id);
+  $("#google email").text(result.email);
+       }
+   });
+
+$.urlParam = function (name) {
+   var results = new RegExp('[\?&]' + name + '=([^&#]*)')
+                     .exec(window.location.search);
+
+   return (results !== null) ? results[1] || 0 : false;
+}
+
+function getGooglePlusApi(auth) {
+ return google.plus({ version: 'v1', auth });
+}
+
+/**
+* Extract the email and id of the google account from the "code" parameter.
+*/
+function getGoogleAccountFromCode(code) {
+ 
+ // get the auth "tokens" from the request
+ const data = await auth.getToken(code);
+ const tokens = data.tokens;
+ 
+ // add the tokens to the google api so we have access to the account
+ const auth = createConnection();
+ auth.setCredentials(tokens);
+ 
+ // connect to google plus - need this to get the user's email
+ const plus = getGooglePlusApi(auth);
+ const me = await plus.people.get({ userId: 'me' });
+ 
+ // get the google id and email
+ const userGoogleId = me.data.id;
+ const userGoogleEmail = me.data.emails && me.data.emails.length && me.data.emails[0].value;
+ 
+ 
+ 
+ // return so we can login or sign up the user
+ return {
+   id: userGoogleId,
+   email: userGoogleEmail,
+   tokens: tokens, // you can save these to the user if you ever want to get their details without making them log in again
+ };
+}
+</script>

@@ -3,21 +3,28 @@ var db = require("../models");
 module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
+    db.books.findAll({}).then(function(dbBooks) {
+      res.render("userpage", {
+        msg: "Welcome!",
+        books: dbBooks
+      });
+    });
+  });
+
+  app.get("/home", function(req, res) {
+    db.books.findAll({}).then(function(dbBooks) {
       res.render("index", {
         msg: "Welcome!",
-        examples: dbExamples
+        books: dbBooks
       });
     });
   });
 
   // Load example page and pass in an example by id
   app.get("/example/:id", function(req, res) {
-    db.Example.findOne({ where: { id: req.params.id } }).then(function(
-      dbExample
-    ) {
-      res.render("example", {
-        example: dbExample
+    db.books.findOne({ where: { id: req.params.id } }).then(function(dbBooks) {
+      res.render("books", {
+        books: dbBooks
       });
     });
   });
