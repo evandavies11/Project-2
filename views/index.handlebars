@@ -91,24 +91,5 @@
 
 
 
-<script type="text/javascript">
-$(document).ready(function() {
-      
-  
-  var code = $.urlParam("code");
-       if(!code)
-       alert($.urlParam("code"));
-       {
-window.location = "https://booksharemahadanevan.herokuapp.com";
-       }
 
-   });
-
-$.urlParam = function (name) {
-   var results = new RegExp('[\?&]' + name + '=([^&#]*)')
-                     .exec(window.location.search);
-
-   return (results !== null) ? results[1] || 0 : "sign in using google";
-}
-</script>
 
